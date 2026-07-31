@@ -1,0 +1,8 @@
+---
+title: "Introducción"
+description: "Una introducción general a las notas"
+execute:
+  echo: true
+  warning: false
+--- 
+

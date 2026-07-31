@@ -1,0 +1,29 @@
+project:
+  type: book
+
+book:
+  title: "sistemas-estocasticos"
+  author: "Antonio Ortiz Ambriz"
+  chapters:
+    - index.qmd
+    - introduccion.qmd
+    - distribuciones.qmd
+    - procesos_markovianos.qmd
+    - tiempo_continuo.qmd
+    - calculo_de_ito.qmd
+    - dinamica_molecular.qmd
+    - metropolis_hastings.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+lang: es
+

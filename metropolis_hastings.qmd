@@ -1,0 +1,7 @@
+---
+title: "Algoritmo de Metrópolis Hastings"
+description: "An overview of lists, dictionaries, and sets."
+execute:
+  echo: true
+  warning: false
+---

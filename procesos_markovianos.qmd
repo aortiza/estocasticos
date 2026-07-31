@@ -1,0 +1,7 @@
+---
+title: "Procesos estocásticos Markovianos"
+description: "."
+execute:
+  echo: true
+  warning: false
+---

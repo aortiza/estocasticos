@@ -1,0 +1,7 @@
+---
+title: "Procesos de tiempo continuo y ecuaciones maestras"
+description: "."
+execute:
+  echo: true
+  warning: false
+---
