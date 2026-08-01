@@ -8,7 +8,7 @@
 
 <meta name="description" content=".">
 
-<title>2&nbsp; Variables aleatorias y distribuciones de probabilidad – sistemas-estocasticos</title>
+<title>3&nbsp; Variables aleatorias y distribuciones de probabilidad – Modelación Numérica de Sistemas Estocásticos</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -77,6 +77,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -89,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./distribuciones.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Variables aleatorias y distribuciones de probabilidad</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./distribuciones.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables aleatorias y distribuciones de probabilidad</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -104,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">sistemas-estocasticos</a> 
+      <a href="./">Modelación Numérica de Sistemas Estocásticos</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -117,25 +146,49 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prefacio</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./introduccion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./distribuciones.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Variables aleatorias y distribuciones de probabilidad</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables aleatorias y distribuciones de probabilidad</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./procesos_markovianos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Procesos estocásticos Markovianos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Procesos estocásticos Markovianos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tiempo_continuo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Procesos de tiempo continuo y ecuaciones maestras</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./calculo_de_ito.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cálculo de Ito</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dinamica_molecular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dinámica Molecular</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./metropolis_hastings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Algoritmo de Metrópolis Hastings</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -149,15 +202,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#espacios-eventos-y-distribuciones-de-probabilidad." id="toc-espacios-eventos-y-distribuciones-de-probabilidad." class="nav-link active" data-scroll-target="#espacios-eventos-y-distribuciones-de-probabilidad."><span class="header-section-number">3.1</span> Espacios, eventos y distribuciones de probabilidad.</a>
+  <ul class="collapse">
+  <li><a href="#definiciones" id="toc-definiciones" class="nav-link" data-scroll-target="#definiciones"><span class="header-section-number">3.1.1</span> Definiciones</a></li>
+  <li><a href="#los-axiomas-de-la-probabilidad" id="toc-los-axiomas-de-la-probabilidad" class="nav-link" data-scroll-target="#los-axiomas-de-la-probabilidad"><span class="header-section-number">3.1.2</span> Los axiomas de la probabilidad</a></li>
+  <li><a href="#distribuciones-de-probabilidad-continuas" id="toc-distribuciones-de-probabilidad-continuas" class="nav-link" data-scroll-target="#distribuciones-de-probabilidad-continuas"><span class="header-section-number">3.1.3</span> Distribuciones de probabilidad continuas</a></li>
+  </ul></li>
+  <li><a href="#distribuciones-conjuntas-y-distribuciones-condicionales" id="toc-distribuciones-conjuntas-y-distribuciones-condicionales" class="nav-link" data-scroll-target="#distribuciones-conjuntas-y-distribuciones-condicionales"><span class="header-section-number">3.2</span> Distribuciones conjuntas y distribuciones condicionales</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Variables aleatorias y distribuciones de probabilidad</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables aleatorias y distribuciones de probabilidad</span></h1>
 </div>
 
 
@@ -174,8 +239,44 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="espacios-eventos-y-distribuciones-de-probabilidad." class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="espacios-eventos-y-distribuciones-de-probabilidad."><span class="header-section-number">3.1</span> Espacios, eventos y distribuciones de probabilidad.</h2>
+<section id="definiciones" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="definiciones"><span class="header-section-number">3.1.1</span> Definiciones</h3>
+<p>Imaginemos un ejemplo de algo que facilmente reconoceremos como aleatorio: un dado. Cuando tiramos un dado, el resultado estará dado por el número que aparece en la cara que queda hacia arriba, de 1 al 6 en un dado tradicional. Si tenemos dos dados diferentes (digamos, uno rojo y uno azul) entonces tenemos 36 diferentes resultados posibles, pero si lo que estamos observando es la suma de ambos, las posibilidades sólo son 12.</p>
+<p>Para poder describir este tipo de fenómenos, necesitamos aclarar algunos conceptos. Dado que en algunas ocasiones trabajaremos con un sólo objeto, como en el caso de un dado, y otras trabajaremos con varios, como cuando observamos los átomos de un gas, definimos el <em>sistema</em> como aquello que estamos intentando describir. A las variables relevantes del sistema, como el valor de cada uno de los dados que tiramos, o la posición y velocidad de todos nuestros átomos, las agruparemos en un vector, que describirá un <em>estado</em> del sistema. Normalmente denotaremos este vector como <span class="math inline">\(\sigma\)</span>. Así mismo, podemos ver que las componentes de <span class="math inline">\(\sigma\)</span> pueden ser discretas, como en el caso de los dados, o continuas, como en el caso de los átomos del gas. Incluso podríamos pensar en casos en que el estado sea una mezcla de variables continuas y discretas, como si en el caso del gas, además de las posiciones y velocidades, incluyeramos la configuración electrónica de cada átomo.</p>
+<p>Partiendo del concepto del estado de un sistema, podemos definir un espacio <span class="math inline">\(\Omega\)</span> a partir de todas las posibles observaciones del estado <span class="math inline">\(\sigma\)</span>. En el caso de un dado, <span class="math inline">\(\Omega=\{1,2,3,4,5,6\}\)</span>, mientras que en el caso de un gas de partículas <span class="math inline">\(\Omega\)</span> es el espacio de fase. El espacio <span class="math inline">\(\Omega\)</span> entonces se compone de todos los posibles valores que puede tomar el estado, y a estos elementos les llamaremos <em>eventos</em>, y los denotaremos <span class="math inline">\(\omega \in \Omega\)</span>. Un evento entones podría al tirar nuestro dado, caiga un 6, o que nuestro par de dados caiga en <span class="math inline">\(\sigma=(3,4)\)</span>.</p>
+<p>Finalmente, <span class="math inline">\(\Omega\)</span> es un conjunto especial de eventos, que consiste en todos los resultados posibles, pero de la misma manera podemos definir otros conjuntos. Por ejemplo, podemos definir un conjunto compuesto por todos los eventos en que el valor del dado sea mayor que 3. Este conjunto lo escribiríamos como <span class="math inline">\(A = \left\{4,5,6\right\}\)</span>. Y así como tenemos el conjunto especial, <span class="math inline">\(\Omega\)</span>, que contiene todos los posibles eventos, existe otro conjunto especial, que es el conjunto vacío, es decir, el que no contiene ningún evento <span class="math inline">\(\emptyset=\{\}\)</span>.</p>
+</section>
+<section id="los-axiomas-de-la-probabilidad" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="los-axiomas-de-la-probabilidad"><span class="header-section-number">3.1.2</span> Los axiomas de la probabilidad</h3>
+<p>Las definiciones discutidas hasta ahora pueden parecer rebuscadas, pero nos permiten definir la probabilidad de manera axiomátia. En este enfoque, definimos una una función de medida que mapea un conjunto de eventos <span class="math inline">\(A\)</span> a un número real que cumple con los siguientes axiomas (conocidos como los axiomas de Kolmogorov):</p>
+<ol type="1">
+<li><p><span class="math inline">\(P(A)\geq 0\)</span> para cualquier conjunto <span class="math inline">\(A\)</span>,</p>
+<p>Esto quiere decir que no podemos tener probabilidades negativas.</p></li>
+<li><p><span class="math inline">\(P(\Omega)=1\)</span>,</p>
+<p>La probabilidad de que ocurra cualquier evento es 1. Es decir, el resultado de nuestra observación debe encontrarse en el espacio <span class="math inline">\(\Omega\)</span> con absoluta certeza.</p></li>
+<li><p>Supongamos que tenemos una colección (contable) de conjuntos <span class="math inline">\(A_i\)</span> (donde <span class="math inline">\(i=1,2,3,4,...\)</span>). Si estos conjuntos son mutuamente excluyentes, de forma que: <span class="math display">\[A_i\cap A_j = ∅ \textrm{ para todo } i\neq j\]</span> entonces <span class="math display">\[P(\cup_i A_i) = \sum_i P(A_i)\]</span></p>
+<p>Este axioma es un poco dificil de visualizar, entonces podemos valernos de nuestro ejemplo del dado. Si tomamos dos posibles resultados, digamos 3 y 4, entonces nuestros conjuntos de eventos serían <span class="math inline">\(A_1 = \{3\}\)</span> y <span class="math inline">\(A_2 = \{4\}\)</span>. La intersección <span class="math inline">\(A_1 \cap A_2 = \emptyset\)</span> porque ningún elemento de <span class="math inline">\(A_1\)</span> se encuentra en <span class="math inline">\(A_2\)</span>. La probabilidad de la unión de ambos conjuntos es la probabilidad de que el dado caiga en 3 o en 4, y el axioma nos diría que <span class="math inline">\(P(\{3,4\}) = P(\{3\})+P(\{4\})\)</span>. Por otro lado, si imaginamos dos conjuntos <span class="math inline">\(A_1 = \{3, 4\}\)</span> y <span class="math inline">\(A_2 = \{4, 5\}\)</span>, entonces la probabilidad de la unión de ambos sería <span class="math inline">\(P(\{3,4,5\}) \neq P(\{3,4\}) + P(\{4,5\})\)</span> por que estaríamos sumando dos veces <span class="math inline">\(P(\{4\})\)</span>.</p></li>
+</ol>
+<p>Existen dos propiedades más de una distribución que pueden ser derivadas a partir de los axiomas:</p>
+<ol start="4" type="1">
+<li>Si el conjunto <span class="math inline">\(\bar{A}\)</span> es el complemento de <span class="math inline">\(A\)</span>, eso quiere decir que <span class="math inline">\(A\cap\bar{A} = \Omega\)</span> y que <span class="math inline">\(A\cup\bar{A} = \emptyset\)</span>. Por el axioma 3, <span class="math inline">\(P(\Omega)=P(A\cap\bar{A})=P(A)+P(\bar{A}) = 1\)</span>. Si despejamos, obtenemos: <span class="math display">\[P(\bar{A}) = 1-P(A)\]</span></li>
+<li>Usando este resultado, y considerando que <span class="math inline">\(\bar{\Omega} = \emptyset\)</span>, podemos ver que <span class="math display">\[P(\emptyset) = 1-P(\Omega)=0\]</span>.</li>
+</ol>
+<p>A la función <span class="math inline">\(P(A)\)</span> le llamaremos una distribución de probabilidad.</p>
+<p>Aquí podemos hacer un parentesis para mencionar que si se define una colección de conjuntos <span class="math inline">\(\mathcal{F} = \{A_1, A_2, ...\}\)</span> de forma cerrada, es decir, que se cumplan las siguientes condiciones: * <span class="math inline">\(\emptyset\in\mathcal{F}\)</span> y <span class="math inline">\(\Omega\in\mathcal{F}\)</span>, * Si <span class="math inline">\(A\in\mathcal{F}\)</span> entonces <span class="math inline">\(\bar{A}\in\mathcal{F}\)</span>, * Si <span class="math inline">\(A_i \in\mathcal{F}\)</span> y <span class="math inline">\(A_j \in \mathcal{F}\)</span> entonces <span class="math inline">\(A_i\cap A_j\in\mathcal{F}\)</span>. entonces se le puede llamar a <span class="math inline">\(\mathcal{F}\)</span> un <span class="math inline">\(\sigma\)</span>-ágebra y se puede definir un espacio de probabilidades como <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span>. Estos detalles son fundamentales para definir una teoría de la probabilidad, pero quedan fuera del alcance de este curso.</p>
+<p>Finalmente es importe conectar esta definición formal con nuestro objeto de estudio. Es decir, hasta ahora, definimos la distribución de probabilidad como una función que conecta conjuntos en un espacio con un número real. Sin embargo, la conexión entre esta función y algún efecto medible en un sistema aleatorio no está explícita aunque solemos tener una idea intuitiva de lo que representa la probabilidad. Esta conexión esta dada por la ley de los números grandes, que dice que si observamos nuestro sistema <span class="math inline">\(N\)</span> veces y contamos <span class="math inline">\(N_A\)</span> como la cantidad de veces que observaremos un evento que pertenece a un conjunto <span class="math inline">\(A\)</span>, en el límite en que <span class="math inline">\(N\)</span> tiende a infinito, obtendremos: <span class="math display">\[N_A = \lim_{N\rightarrow\infty} N P(A)\]</span></p>
+</section>
+<section id="distribuciones-de-probabilidad-continuas" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="distribuciones-de-probabilidad-continuas"><span class="header-section-number">3.1.3</span> Distribuciones de probabilidad continuas</h3>
+</section>
+</section>
+<section id="distribuciones-conjuntas-y-distribuciones-condicionales" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="distribuciones-conjuntas-y-distribuciones-condicionales"><span class="header-section-number">3.2</span> Distribuciones conjuntas y distribuciones condicionales</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -581,12 +682,12 @@ ul.task-list li input[type="checkbox"] {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./introduccion.html" class="pagination-link" aria-label="Introducción">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./procesos_markovianos.html" class="pagination-link" aria-label="Procesos estocásticos Markovianos">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Procesos estocásticos Markovianos</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Procesos estocásticos Markovianos</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
