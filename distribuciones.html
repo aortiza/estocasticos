@@ -107,6 +107,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -213,7 +214,11 @@ window.Quarto = {
   <li><a href="#los-axiomas-de-la-probabilidad" id="toc-los-axiomas-de-la-probabilidad" class="nav-link" data-scroll-target="#los-axiomas-de-la-probabilidad"><span class="header-section-number">3.1.2</span> Los axiomas de la probabilidad</a></li>
   <li><a href="#distribuciones-de-probabilidad-continuas" id="toc-distribuciones-de-probabilidad-continuas" class="nav-link" data-scroll-target="#distribuciones-de-probabilidad-continuas"><span class="header-section-number">3.1.3</span> Distribuciones de probabilidad continuas</a></li>
   </ul></li>
-  <li><a href="#distribuciones-conjuntas-y-distribuciones-condicionales" id="toc-distribuciones-conjuntas-y-distribuciones-condicionales" class="nav-link" data-scroll-target="#distribuciones-conjuntas-y-distribuciones-condicionales"><span class="header-section-number">3.2</span> Distribuciones conjuntas y distribuciones condicionales</a></li>
+  <li><a href="#distribuciones-conjuntas-y-distribuciones-condicionales" id="toc-distribuciones-conjuntas-y-distribuciones-condicionales" class="nav-link" data-scroll-target="#distribuciones-conjuntas-y-distribuciones-condicionales"><span class="header-section-number">3.2</span> Distribuciones conjuntas y distribuciones condicionales</a>
+  <ul class="collapse">
+  <li><a href="#distribuciones-de-probabilidad-conjunta" id="toc-distribuciones-de-probabilidad-conjunta" class="nav-link" data-scroll-target="#distribuciones-de-probabilidad-conjunta"><span class="header-section-number">3.2.1</span> Distribuciones de probabilidad conjunta</a></li>
+  <li><a href="#distribuciones-de-probabilidad-condicional" id="toc-distribuciones-de-probabilidad-condicional" class="nav-link" data-scroll-target="#distribuciones-de-probabilidad-condicional"><span class="header-section-number">3.2.2</span> Distribuciones de probabilidad condicional</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -272,7 +277,7 @@ window.Quarto = {
 <li><p>Si <span class="math inline">\(A_i \in\mathcal{F}\)</span> y <span class="math inline">\(A_j \in \mathcal{F}\)</span> entonces <span class="math inline">\(A_i\cap A_j\in\mathcal{F}\)</span>.</p></li>
 </ul>
 <p>entonces se le puede llamar a <span class="math inline">\(\mathcal{F}\)</span> un <span class="math inline">\(\sigma\)</span>-ágebra y se puede definir un espacio de probabilidades como <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span>. Estos detalles son fundamentales para definir una teoría de la probabilidad, pero quedan fuera del alcance de este curso.</p>
-<p>Finalmente es importe conectar esta definición formal con nuestro objeto de estudio. Es decir, hasta ahora, definimos la distribución de probabilidad como una función que conecta conjuntos en un espacio con un número real. Sin embargo, la conexión entre esta función y algún efecto medible en un sistema aleatorio no está explícita aunque solemos tener una idea intuitiva de lo que representa la probabilidad. Esta conexión esta dada por la ley de los números grandes, que dice que si observamos nuestro sistema <span class="math inline">\(N\)</span> veces y contamos <span class="math inline">\(N_A\)</span> como la cantidad de veces que observaremos un evento que pertenece a un conjunto <span class="math inline">\(A\)</span>, en el límite en que <span class="math inline">\(N\)</span> tiende a infinito, obtendremos: <span class="math display">\[N_A = \lim_{N\rightarrow\infty} N P(A)\]</span></p>
+<p>Finalmente es importante conectar esta definición formal con nuestro objeto de estudio. Es decir, hasta ahora, definimos la distribución de probabilidad como una función que conecta conjuntos en un espacio con un número real. Sin embargo, la conexión entre esta función y algún efecto medible en un sistema aleatorio no está explícita aunque solemos tener una idea intuitiva de lo que representa la probabilidad. Esta conexión esta dada por la ley de los números grandes, que dice que si observamos nuestro sistema <span class="math inline">\(N\)</span> veces y contamos <span class="math inline">\(N_A\)</span> como la cantidad de veces que observaremos un evento que pertenece a un conjunto <span class="math inline">\(A\)</span>, en el límite en que <span class="math inline">\(N\)</span> tiende a infinito, obtendremos: <span id="eq-large-numbers"><span class="math display">\[N_A = \lim_{N\rightarrow\infty} N P(A) \tag{3.1}\]</span></span></p>
 </section>
 <section id="distribuciones-de-probabilidad-continuas" class="level3" data-number="3.1.3">
 <h3 data-number="3.1.3" class="anchored" data-anchor-id="distribuciones-de-probabilidad-continuas"><span class="header-section-number">3.1.3</span> Distribuciones de probabilidad continuas</h3>
@@ -280,8 +285,38 @@ window.Quarto = {
 </section>
 <section id="distribuciones-conjuntas-y-distribuciones-condicionales" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="distribuciones-conjuntas-y-distribuciones-condicionales"><span class="header-section-number">3.2</span> Distribuciones conjuntas y distribuciones condicionales</h2>
+<section id="distribuciones-de-probabilidad-conjunta" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="distribuciones-de-probabilidad-conjunta"><span class="header-section-number">3.2.1</span> Distribuciones de probabilidad conjunta</h3>
+<p>En la discusión del tercer axioma hablamos sobre la probabilidad de que un evento pertenezca a la unión de varios conjuntos mutuamente excluyentes. Si dos conjuntos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> no son mutuamente excluyentes, entonces existe una intersección entre ambos conjuntos; es decir, se puede escribir <span class="math inline">\(A\cap B \neq \emptyset\)</span>. A la probabilidad de que un evento <span class="math inline">\(\omega\)</span>, pertenezca a ambos conjuntos, <span class="math inline">\((\omega\in A) \land (\omega\in B)\)</span>, la escribiremos como: <span class="math display">\[P(A\cap B)\]</span> y la llamamos la probabilidad conjunta.</p>
+<p>Esta probabilidad es útil, por ejemplo, para describir el caso en que tenemos dos dados. En este caso, podríamos definir el conjunto <span class="math inline">\(A\)</span> a partir de todos los eventos en los que el dado <span class="math inline">\(d_A = 2\)</span> y el conjunto <span class="math inline">\(B\)</span> como todos los eventos en los que el dado <span class="math inline">\(d_B = 4\)</span>. Si <span class="math inline">\(d_A = 2\)</span> y <span class="math inline">\(d_B = 3\)</span>, nuestro evento pertenece a <span class="math inline">\(A\)</span>, pero no a <span class="math inline">\(B\)</span>. Para que pertenezca a ambos conjuntos, tenemos que tener el resultado específico de <span class="math inline">\(d_A = 2\)</span> y <span class="math inline">\(d_B=4\)</span>.</p>
+<p>Imaginemos que dividios el espacio <span class="math inline">\(\Omega\)</span> en una colección de conjuntos mutuamente excluyentes <span class="math inline">\(B_i\)</span>. Esto quiere decir que:</p>
+<ul>
+<li><p><span class="math display">\[\cup_i B_i = \Omega\]</span></p></li>
+<li><p><span class="math display">\[B_i \cap B_j = \emptyset \]</span> para todo par <span class="math inline">\(i\neq j\)</span></p></li>
+</ul>
+<p>Como esta colleccion cumple con las condiciones del axioma 3, entonces podemos decir que <span class="math inline">\(P(\cup_i B_i) = \sum_i P(B_i) = 1\)</span>. Es decir, como subdividimos todo el espacio en los conjuntos <span class="math inline">\(B_i\)</span>, podemos asegurar que nuestro evento debe pertenecer a algún conjunto <span class="math inline">\(B_i\)</span>.</p>
+<p>Pero además, podemos ver que, si <span class="math inline">\(B_i\cap B_j = \emptyset\)</span>, entonces <span class="math inline">\((A\cap B_i)\cap(A\cap B_i) = \emptyset\)</span>, lo que significa que todos los conjuntos <span class="math inline">\(A\cap B_i\)</span> cumplen también con las condiciones del axioma 3, y por lo tanto:</p>
+<p><span class="math display">\[
+\begin{align}
+\sum_i P(A \cap B_i)&amp;= P(\cup_i (A\cap B_i))\\
+&amp;= P(A \cap (\cup_i B_i))\\
+&amp;= P(A \cap \Omega) \\
+&amp;= P(A)
+\end{align}
+\]</span> De nuevo, podemos visualizar mejor lo que significa este resultado si recordamos nuestros dos dados. En este caso, podemos pensar que nuestro conjunto <span class="math inline">\(A\)</span> contiene los eventos en los que <span class="math inline">\(d_A = 3\)</span>, y el conjunto <span class="math inline">\(B_i\)</span> contiene los eventos en que <span class="math inline">\(d_B = i\)</span>. La colección de los conjuntos <span class="math inline">\(B_i\)</span> entonces cubre todo el espacio, por que si el evento cumple con <span class="math inline">\(d_B = 1\)</span>, este evento pertenece a <span class="math inline">\(B_1\)</span>, si <span class="math inline">\(d_B=2\)</span>, pertenece a <span class="math inline">\(B_2\)</span> y así para todos los valores posibles de <span class="math inline">\(d_2\)</span>.</p>
+<p>Del lado izquierdo de la expresión, tenemos la suma de todas las probabilidades conjuntas. Eso sería, la probabilidad <span class="math inline">\(P(A \cup B_1)+P(A \cup B_2) ...\)</span>, es decir, la probabilidad de que <span class="math inline">\(d_A = 3\)</span> y <span class="math inline">\(d_B = 1\)</span> más la probabilidad de que <span class="math inline">\(d_A = 3\)</span> y <span class="math inline">\(d_B = 2\)</span> más la probabilidad de que <span class="math inline">\(d_A=3\)</span> y <span class="math inline">\(d_B = 3\)</span>, etc. Lo que el resultado anterior nos dice, es que esta probabilidad es igual a la probabilidad <span class="math inline">\(P(A)\)</span>, es decir, la probabilidad de que <span class="math inline">\(d_A = 3\)</span>. Lo podemos imaginar como que estamos integrando la probabilidad de todos los posibles valores de <span class="math inline">\(d_B\)</span> y recuperando la probabilidad de <span class="math inline">\(d_A = 3\)</span>. A la probabilidad <span class="math inline">\(P(A)\)</span> recuperada a partir de las probabilidades conjuntas <span class="math inline">\(P(A\cup B_i)\)</span> le llamamos la <em>probabilidad marginal</em></p>
+<p>Este resultado se puede generalizar y escribir de la forma: <span id="eq-setintegration"><span class="math display">\[
+\sum_iP(A_i\cap B_j\cap C_k \cap ...) = P(B_j \cap C_k \cap ...)
+\tag{3.2}\]</span></span></p>
+</section>
+<section id="distribuciones-de-probabilidad-condicional" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="distribuciones-de-probabilidad-condicional"><span class="header-section-number">3.2.2</span> Distribuciones de probabilidad condicional</h3>
+<p>En algunas ocasiones querremos saber cual es la probabilidad de que algo ocurra dada una información. El ejemplo de los dados en este caso es menos útil, por que ambos dados son independientes (aunque se pueden construir ejemplos a partir de operaciones entre ambos dados). En vez de eso, podemos pensar en un mazo de cartas, que normalmente tiene 52 cartas, con 13 números de cada palo y cuatro palos. En este caso, la pregunta sería la siguiente: Si sabemos que sacamos una carta con un número mayor que 10 (sota, reina o rey), ¿Cual es la probabilidad de que sea de corazones?</p>
+<p>La probabilidad condicional está dada por la expresión: <span id="eq-conditionalprob"><span class="math display">\[P(A|B) = \frac{P(A\cap B)}{P(B)} \tag{3.3}\]</span></span> En nuestro ejemplo, supondremos que el conjunto <span class="math inline">\(B\)</span> en este caso consiste en los eventos en que sacamos una carta mayor que 10. Sabemos que hay en total 12 cartas mayores que 10 (tres por palo), entonces la probabilidad <span class="math inline">\(P(B) = \frac{12}{52}\)</span>. Si <span class="math inline">\(A\)</span> es el conjunto de los eventos en que sacamos un corazón, y hay tres corazones mayores que 10, entonces, la probabilidad <span class="math inline">\(P(A\cap B) = \frac{3}{52}\)</span>. Utilizando la expresión anterior vemos que la probabilidad de sacar corazones, dado que sabemos que sacamos una carta mayor a 10 está dada por: <span class="math display">\[P(A|B)= \frac{\frac{3}{52}}{\frac{12}{52}} = \frac{1}{4}\]</span> Este resultado es lo que esperamos si pensamos que el número de cartas de corazon representa una cuarta parte de las cartas mayores que 10.</p>
+<p>A partir de la ecuación <a href="#eq-setintegration" class="quarto-xref">Ecuación&nbsp;<span>3.2</span></a>, podemos escribir la siguiente expresión para la probabilidad condicional: <span id="eq-totalprob"><span class="math display">\[\sum_i P(A|B_i)P(B_i) = P(A) \tag{3.4}\]</span></span> A esta expresión se le llama la ley de la probabilidad total, y será fundamental más adelante para comprender y obtener resultados sobre procesos estocásticos.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
