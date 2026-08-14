@@ -33,7 +33,7 @@ Las definiciones discutidas hasta ahora pueden parecer rebuscadas, pero nos perm
 
    La probabilidad de que ocurra cualquier evento es 1. Es decir, el resultado de nuestra observación debe encontrarse en el espacio $\Omega$ con absoluta certeza.
 
-3. Supongamos que tenemos una colección (contable) de conjuntos $A_i$ (donde $i=1,2,3,4,...$). Si estos conjuntos son mutuamente excluyentes, de forma que:
+3. Supongamos que tenemos una colección (finita o infinita, pero contable) de conjuntos $A_i$ (donde $i=1,2,3,4,...$). Si estos conjuntos son mutuamente excluyentes, de forma que:
    $$A_i\cap A_j = ∅ \textrm{ para todo } i\neq j$$
    entonces
    $$P(\cup_i A_i) = \sum_i P(A_i)$$
@@ -63,7 +63,11 @@ $$N_A = \lim_{N\rightarrow\infty} N P(A)$${#eq-large-numbers}
 
 ### Distribuciones de probabilidad continuas
 
+Hasta ahorita los ejemplos que hemos descrito, y la forma en que hemos pensado en los conjuntos es más acorde a sistemas discretos, pero existen muchos sistemas que requieren una descripción usando variables en un espacio continuo. Anteriormente mencionamos por ejemplo, un gas de átomos, donde las variables son velocidad y posición de todos los átomos. Otro ejemplo común es el de la altura de una persona elejida al azar en una población. 
 
+Una de las ventajas de la definición que hicimos de la probabilidad como una medida que se aplica a un conjunto, es que es fácil generalizarla a un espacio continuo. Observando los axiomas, podríamos definir directamente conjuntos de eventos, como por ejemplo, que la altura de una persona sea exáctamente 1.70m. Sin embargo, esto causa un problema, porque se pueden definir un número infinito no contable de conjuntos de esta forma, y por más pequeña que fuera la probabilidad de encontrar esa altura específica, la suma de un número incontable de números es infinita, sin importar cuan pequeños sean esos números. Esto significa que la probabilidad de encontrar a alguien que mida exáctamente 1.70m tiene que ser 0. 
+
+El truco es que podemos dividir el espacio en $N$ conjuntos de tamaño $\delta$, y hacer que $N\rightarrow \infty$. Haciendo esto, podemos asociar una probabilidad al conjunto de eventos en donde la altura se encuentra dentro de cierta vecindad.  
 
 ## Distribuciones conjuntas y distribuciones condicionales
 
@@ -117,4 +121,25 @@ A partir de la ecuación @eq-setintegration, podemos escribir la siguiente expre
 $$\sum_i P(A|B_i)P(B_i) = P(A)$${#eq-totalprob}
 A esta expresión se le llama la ley de la probabilidad total, y será fundamental más adelante para comprender y obtener resultados sobre procesos estocásticos. 
 
+## Variables aleatorias y notación
 
+Hasta ahora hemos trabajado con probabilidades que escribimos como $P(A)$ que quiere decir probabilidad de que un evento $\omega$ pertenezca al conjunto $A$. También introducimos el estado de un sistema como $\sigma$, que puede valer algo diferente cada vez que lo observamos, y el espacio de las posibles observaciones es $\Omega$. Utilizando nuestro ejemplo de los dados, si quisieramos escribir la probabilidad de que un dado salga 3, tendríamos que escribir $P(\{3\})$, en donde los corchetes indican que el conjunto que estamos evaluando es el que contiene al valor 3. En general, esto significaría escribir la probabilidad como $P({\sigma})$ para indicar que estamos evaluando la medida de probabilidad asociada al conjunto que contiene al punto $\sigma$ en el espacio de posibles eventos. En lo que sigue, escribiremos simplemente $P(\sigma)$. 
+
+Finalmente, en algunas ocasiones es útil definir funciones a partir del estado del sistema. Dado que el sistema toma un valor diferente en sucesivas observaciones, una función $F(\sigma)$ también tomará un valor diferente. Al resultado de la función, que puede ser un valor o un vector, se le llama una variable aleatoria. Por ejemplo, si tiramos dos dados, la suma de ambos dados será una variable aleatoria. En mecánica estadística es común evaluar la energía interna de un sistema que depende de las posiciones y velocidades, es decir, del estado: $E(\sigma)$. 
+
+Estas variables normalmente son numéricas, lo que permite obtener observables como el promedio o la varianza.
+Este valor promedio surge a partir de minimizar la suma de las distancias entre las observaciones y el valor promedio, en el límite en que se realizan $N\rightarrow\infty$ observaciones.
+Si tenemos una variable aleatoria $R(\sigma)$, el promedio de una variable aleatoria se define como 
+$$\left<R\right> = \sum_{\sigma\in\Omega} P(\sigma) R(\sigma)$$,
+donde la suma se realiza sobre todos los posibles estados del espacio $\Omega$.
+En este sentido, se puede entender como una medida del centro de la distribución $P(R)$.
+
+La varianza se define como:
+$$var(R) = \left<R^2\right>-\left<R\right>^2$$
+donde al término \left<R^2\right> se le llama el segundo momento y se calcula como:
+$$\left<R^2\right> = \sum_{\sigma\in\Omega} P(\sigma) R(\sigma)^2$$
+La varianza, así como la desviación estandar $std = \sqrt{var}$ es una medida de la dispersión entre las observaciones de una variable aleatoria, o el ancho de una distribución. 
+
+En general, la idea de los momentos se puede generalizar de la siguiente forma. El momento $n$ está dado por: 
+$$\left<R^n \right> = \sum_{\sigma\in\Omega} P(\sigma) R(\sigma)^n $$
+Estos momentos son útiles como mediciones de la forma de una distribución. Por ejemplo, una distribución Gausiana está definida por sus primeros dos momentos. En general, si dos distribuciones tienen los mismos momentos, la forma de la distribución será la misma. 

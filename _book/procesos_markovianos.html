@@ -77,7 +77,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -173,8 +203,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#definición-de-un-proceso-estocástico" id="toc-definición-de-un-proceso-estocástico" class="nav-link active" data-scroll-target="#definición-de-un-proceso-estocástico"><span class="header-section-number">4.1</span> Definición de un proceso estocástico</a></li>
+  <li><a href="#procesos-estocásticos-markovianos" id="toc-procesos-estocásticos-markovianos" class="nav-link" data-scroll-target="#procesos-estocásticos-markovianos"><span class="header-section-number">4.2</span> Procesos estocásticos markovianos</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -198,8 +235,51 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="definición-de-un-proceso-estocástico" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="definición-de-un-proceso-estocástico"><span class="header-section-number">4.1</span> Definición de un proceso estocástico</h2>
+<p>En la sección anterior llamamos <span class="math inline">\(\sigma\)</span> al estado de un sistema y definimos la probabilidad <span class="math inline">\(P(σ)\)</span> como la probabilidad de que una observación tenga el valor <span class="math inline">\(\sigma\)</span>. Si lo que nos interesa de nuestro sistema son observaciones aisladas, este formalismo es suficiente. Sin embargo, si queremos modelar procesos, debemos incorporar en nuestras herramientas una especie de secuencia o temporalidad.</p>
+<p>Un proceso estocástico es una secuencia de observaciones <span class="math inline">\((\sigma_1, \sigma_2, \sigma_3, ...,)\)</span> realizadas en instantes determinados <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, <span class="math inline">\(t_3\)</span>, <span class="math inline">\(...\)</span>,. La propiedad de estocástico, nos dice que debe existir una probabilidad conjunta: <span class="math display">\[P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3; ...)\]</span> que es la probabilidad de que tengamos una secuencia específica de observaciones <span class="math inline">\(\sigma_i\)</span> en los instantes <span class="math inline">\(t_i\)</span>. Notemos que aquí los instantes de tiempo son momentos específicos determinados; es decir, lo que será diferente en cada momento será <span class="math inline">\(\sigma\)</span>, pero los instantes los podemos controlar. En los términos que discutimos en la sección anterior, esta es la probabilidad de que observemos <span class="math inline">\(\sigma_1\)</span> en <span class="math inline">\(t_1\)</span> y <span class="math inline">\(\sigma_2\)</span> en <span class="math inline">\(t_2\)</span> y <span class="math inline">\(\sigma_3\)</span> en <span class="math inline">\(t_3\)</span> y … o en otras palabras, la probabilidad de una realización.</p>
+<p>Los procesos estocásticos más sencillos son los totalmente independientes. Estos procesos cumplen con la condición: <span class="math display">\[
+\begin{align}
+P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3; ...) &amp; = P(\sigma_1, t_1) P(\sigma_2, t_2) P(\sigma_3, t_3)\\
+&amp; = \prod_i P(\sigma_i, t_i)
+\end{align}\]</span> De nuevo, un ejemplo de un proceso estocástico totalmente independiente es la secuencia que resulta de tirar un dado repetidamente, o de forma equivalente, la secuencia de tirar <span class="math inline">\(N\)</span> dados. En ambos casos el resultado de la tirada <span class="math inline">\(i\)</span> no depende de nada de lo que haya sucedido en el pasado.</p>
+<p>En el otro extremo, podemos pensar en un caso en el que cada observación depende de todas las otras observaciones. Esto se escribiría de la siguiente forma <span class="math display">\[
+P(\sigma_i, t_i |
+  \sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1},
+  \sigma_{i+1}, t_{i+1}, ... ) =
+\frac{P(\sigma_1, t_1; \sigma_2, t_2; ...) }
+{
+P(\sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1},
+  \sigma_{i+1}, t_{i+1}, ... )
+}
+\]</span> Es decir, existe una probabilidad condicional de observacionesr <span class="math inline">\(\sigma_i\)</span> en <span class="math inline">\(t_i\)</span>, dado que sabemos cuales son todos los otros valores de <span class="math inline">\(\sigma\)</span>, <span class="math inline">\((\sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1}, \sigma_{i+1}, t_{i+1})\)</span> y esta probabilidad es diferente de la probabilidad marginal <span class="math inline">\(P(\sigma_i, t_i)\)</span>.</p>
+<p>Este proceso totalmente dependiente es un proceso extraño y poco intuitivo, por que no corresponde con lo que nosotros entendemos de un proceso definido en el tiempo. En principio, matemáticamente no tenemos porque pensar que un proceso debe ser . Sin embargo, físicamente, es si estamos estudiando observaciones que suceden en instantes de tiempo, tiene mucho más sentido establecer que estas tienen que depender sólo del pasado.</p>
+<p>Supondremos que los instantes de tiempo están ordenados de mayor a menor, $t_1 t_2 t_3 … $. Es decir, que la última observación realizada fue <span class="math inline">\(\sigma_1\)</span>. En este caso, un proceso causal se puede escribir cómo <span id="eq-proc_cond"><span class="math display">\[P(\sigma_1, t_1 | \sigma_2, t_2; \sigma_3, t_3; ...) =
+\frac{P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3;...) }
+{
+P(\sigma_2, t_2; \sigma_3, t_3; ... )
+}
+\tag{4.1}\]</span></span></p>
+<p>En un proceso así, la última observación depende de todo el historial de observaciones. Es decir, que tiene memoria. El estudio de los procesos con memoria tiene implicaciones importantes en el desarrollo de la mecánica estadística fuera de equilibrio y en materiales no lineales, entre otras areas, y es un area activa de investigación. En este curso nos concentraremos en sistemas que no tienen memoria.</p>
+</section>
+<section id="procesos-estocásticos-markovianos" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="procesos-estocásticos-markovianos"><span class="header-section-number">4.2</span> Procesos estocásticos markovianos</h2>
+<p>Que un proceso estocástico no tenga memoria no quiere decir que sea absolutamente independiente, sino que la última observación sólo depende de la observación anterior. En este sentido, se puede escribir de la siguiente forma: <span id="eq-markov"><span class="math display">\[ P(\sigma_1, t_1 | \sigma_2, t_2; \sigma_3, t_3; ...) = P(\sigma_1, t_1 | \sigma_2, t_2) \tag{4.2}\]</span></span> Lo que esta expresión dice, es que la probabilidad de obtener <span class="math inline">\(\sigma_1\)</span>, en <span class="math inline">\(t_1\)</span>, dado que sabemos toda la secuencia <span class="math inline">\(\sigma_2\)</span>, <span class="math inline">\(\sigma_3\)</span>,… es exáctamente igual que la probabilidad de obtener <span class="math inline">\(\sigma_1\)</span> sabiendo que obtuvimos <span class="math inline">\(\sigma_2\)</span>. En otras palabras, <span class="math inline">\(\sigma_3\)</span>, <span class="math inline">\(\sigma_4\)</span>, … no aportan ninguna información que no esté contenida ya en el estado <span class="math inline">\(\sigma_2\)</span>.</p>
+<p>Si combinamos las expresiones <a href="#eq-markov" class="quarto-xref">Ecuación&nbsp;<span>4.2</span></a> y <a href="#eq-proc_cond" class="quarto-xref">Ecuación&nbsp;<span>4.1</span></a> podemos encontrar la siguiente expresión para la probabilidad de observar una realización específica. <span class="math display">\[P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3; ... ) =
+P(\sigma_1, t_1|\sigma_2, t_2)P(\sigma_2, t_2; \sigma_3, t_3; ...)
+\]</span> y si continuamos haciendo este procedimiento: <span class="math display">\[
+\begin{align}
+P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3; ... ) =
+P(\sigma_1, t_1| \sigma_2, t_2)
+P(\sigma_2, t_2| \sigma_3, t_3)... \\
+P(\sigma_{n-1}|t_{n-1})P(\sigma_n, t_n)
+\end{align}
+\]</span> En donde <span class="math inline">\(\sigma_n\)</span>, <span class="math inline">\(t_n\)</span> son las condiciones iniciales del proceso.</p>
+<p>A la probabilidad <span class="math inline">\(P(\sigma_i, t_i | \sigma_{i-1}, t_{i-1})\)</span> le llamamos <strong>probabilidad de transición</strong> y nos dice cual es la probabilidad de encontrarnos en un estado <span class="math inline">\(\sigma_i\)</span> sabiendo que estamos en un estado <span class="math inline">\(\sigma_{i-1}\)</span> en el instante anterior. Esta última ecuación nos permite llegar a una conclusión importante. Para caracterizar un proceso markoviano, sólo es necesario contar con las probabilidades de transición.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

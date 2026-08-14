@@ -4,4 +4,71 @@ description: "."
 execute:
   echo: true
   warning: false
----
+--- 
+
+## Definición de un proceso estocástico
+
+En la sección anterior llamamos $\sigma$ al estado de un sistema y definimos la probabilidad $P(σ)$ como la probabilidad de que una observación tenga el valor $\sigma$. Si lo que nos interesa de nuestro sistema son observaciones aisladas, este formalismo es suficiente. Sin embargo, si queremos modelar procesos, debemos incorporar en nuestras herramientas una especie de secuencia o temporalidad.
+
+Un proceso estocástico es una secuencia de observaciones $(\sigma_1, \sigma_2, \sigma_3, ...,)$ realizadas en instantes determinados $t_1$, $t_2$, $t_3$, $...$,. La propiedad de estocástico, nos dice que debe existir una probabilidad conjunta: 
+$$P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3; ...)$$
+que es la probabilidad de que tengamos una secuencia específica de observaciones $\sigma_i$ en los instantes $t_i$. Notemos que aquí los instantes de tiempo son momentos específicos determinados; es decir, lo que será diferente en cada momento será $\sigma$, pero los instantes los podemos controlar. En los términos que discutimos en la sección anterior, esta es la probabilidad de que observemos $\sigma_1$ en $t_1$ y $\sigma_2$ en $t_2$ y $\sigma_3$ en $t_3$ y ... o en otras palabras, la probabilidad de una realización. 
+
+Los procesos estocásticos más sencillos son los totalmente independientes. Estos procesos cumplen con la condición:
+$$
+\begin{align}
+P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3; ...) & = P(\sigma_1, t_1) P(\sigma_2, t_2) P(\sigma_3, t_3)\\
+ & = \prod_i P(\sigma_i, t_i) 
+\end{align}$$
+De nuevo, un ejemplo de un proceso estocástico totalmente independiente es la secuencia que resulta de tirar un dado repetidamente, o de forma equivalente, la secuencia de tirar $N$ dados. En ambos casos el resultado de la tirada $i$ no depende de nada de lo que haya sucedido en el pasado. 
+
+En el otro extremo, podemos pensar en un caso en el que cada observación depende de todas las otras observaciones. Esto se escribiría de la siguiente forma
+$$
+P(\sigma_i, t_i |
+  \sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1}, 
+  \sigma_{i+1}, t_{i+1}, ... ) =
+\frac{P(\sigma_1, t_1; \sigma_2, t_2; ...) }
+{
+P(\sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1}, 
+  \sigma_{i+1}, t_{i+1}, ... ) 
+}
+$$
+Es decir, existe una probabilidad condicional de observacionesr $\sigma_i$ en $t_i$, dado que sabemos cuales son todos los otros valores de $\sigma$, $(\sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1}, \sigma_{i+1}, t_{i+1})$
+y esta probabilidad es diferente de la probabilidad marginal $P(\sigma_i, t_i)$. 
+
+Este proceso totalmente dependiente es un proceso extraño y poco intuitivo, por que no corresponde con lo que nosotros entendemos de un proceso definido en el tiempo. En principio, matemáticamente no tenemos porque pensar que un proceso debe ser \emph{causal}. Sin embargo, físicamente, es si estamos estudiando observaciones que suceden en instantes de tiempo, tiene mucho más sentido establecer que estas tienen que depender sólo del pasado. 
+
+Supondremos que los instantes de tiempo están ordenados de mayor a menor, $t_1 \geq t_2 \geq t_3 \geq... $. Es decir, que la última observación realizada fue $\sigma_1$. En este caso, un proceso causal se puede escribir cómo
+$$P(\sigma_1, t_1 | \sigma_2, t_2; \sigma_3, t_3; ...) =
+\frac{P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3;...) }
+{
+P(\sigma_2, t_2; \sigma_3, t_3; ... ) 
+}
+$${#eq-proc_cond}
+
+
+En un proceso así, la última observación depende de todo el historial de observaciones. Es decir, que tiene memoria. El estudio de los procesos con memoria tiene implicaciones importantes en el desarrollo de la mecánica estadística fuera de equilibrio y en materiales no lineales, entre otras areas, y es un area activa de investigación. En este curso nos concentraremos en sistemas que no tienen memoria. 
+
+## Procesos estocásticos markovianos
+
+Que un proceso estocástico no tenga memoria no quiere decir que sea absolutamente independiente, sino que la última observación sólo depende de la observación anterior. En este sentido, se puede escribir de la siguiente forma:
+$$ P(\sigma_1, t_1 | \sigma_2, t_2; \sigma_3, t_3; ...) = P(\sigma_1, t_1 | \sigma_2, t_2)$${#eq-markov}
+Lo que esta expresión dice, es que la probabilidad de obtener $\sigma_1$, en $t_1$, dado que sabemos toda la secuencia $\sigma_2$, $\sigma_3$,... es exáctamente igual que la probabilidad de obtener $\sigma_1$ sabiendo que obtuvimos $\sigma_2$. En otras palabras, $\sigma_3$, $\sigma_4$, ... no aportan ninguna información que no esté contenida ya en el estado $\sigma_2$. 
+
+Si combinamos las expresiones @eq-markov y @eq-proc_cond podemos encontrar la siguiente expresión para la probabilidad de observar una realización específica.
+$$P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3; ... ) = 
+P(\sigma_1, t_1|\sigma_2, t_2)P(\sigma_2, t_2; \sigma_3, t_3; ...)
+$$
+y si continuamos haciendo este procedimiento:
+$$
+\begin{align}
+P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3; ... ) = 
+P(\sigma_1, t_1| \sigma_2, t_2)
+P(\sigma_2, t_2| \sigma_3, t_3)... \\
+P(\sigma_{n-1}|t_{n-1})P(\sigma_n, t_n)
+\end{align}
+$$
+En donde $\sigma_n$, $t_n$ son las condiciones iniciales del proceso.
+
+A la probabilidad $P(\sigma_i, t_i | \sigma_{i-1}, t_{i-1})$ le llamamos **probabilidad de transición** y nos dice cual es la probabilidad de encontrarnos en un estado $\sigma_i$ sabiendo que estamos en un estado $\sigma_{i-1}$ en el instante anterior. 
+Esta última ecuación nos permite llegar a una conclusión importante. Para caracterizar un proceso markoviano, sólo es necesario contar con las probabilidades de transición.
