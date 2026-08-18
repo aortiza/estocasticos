@@ -209,7 +209,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#definición-de-un-proceso-estocástico" id="toc-definición-de-un-proceso-estocástico" class="nav-link active" data-scroll-target="#definición-de-un-proceso-estocástico"><span class="header-section-number">4.1</span> Definición de un proceso estocástico</a></li>
-  <li><a href="#procesos-estocásticos-markovianos" id="toc-procesos-estocásticos-markovianos" class="nav-link" data-scroll-target="#procesos-estocásticos-markovianos"><span class="header-section-number">4.2</span> Procesos estocásticos markovianos</a></li>
+  <li><a href="#procesos-estocásticos-markovianos" id="toc-procesos-estocásticos-markovianos" class="nav-link" data-scroll-target="#procesos-estocásticos-markovianos"><span class="header-section-number">4.2</span> Procesos estocásticos markovianos</a>
+  <ul class="collapse">
+  <li><a href="#la-ecuación-de-chapman-kolmogorov" id="toc-la-ecuación-de-chapman-kolmogorov" class="nav-link" data-scroll-target="#la-ecuación-de-chapman-kolmogorov"><span class="header-section-number">4.2.1</span> La ecuación de Chapman-Kolmogorov</a></li>
+  <li><a href="#formulación-matricial-de-un-proceso-estocástico" id="toc-formulación-matricial-de-un-proceso-estocástico" class="nav-link" data-scroll-target="#formulación-matricial-de-un-proceso-estocástico"><span class="header-section-number">4.2.2</span> Formulación matricial de un proceso estocástico</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -245,14 +249,16 @@ P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3; ...) &amp; = P(\sigma_1, t_1) P(\
 &amp; = \prod_i P(\sigma_i, t_i)
 \end{align}\]</span> De nuevo, un ejemplo de un proceso estocástico totalmente independiente es la secuencia que resulta de tirar un dado repetidamente, o de forma equivalente, la secuencia de tirar <span class="math inline">\(N\)</span> dados. En ambos casos el resultado de la tirada <span class="math inline">\(i\)</span> no depende de nada de lo que haya sucedido en el pasado.</p>
 <p>En el otro extremo, podemos pensar en un caso en el que cada observación depende de todas las otras observaciones. Esto se escribiría de la siguiente forma <span class="math display">\[
+\begin{align}
 P(\sigma_i, t_i |
-  \sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1},
-  \sigma_{i+1}, t_{i+1}, ... ) =
-\frac{P(\sigma_1, t_1; \sigma_2, t_2; ...) }
+  \sigma_1, t_1; &amp; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1},
+  \sigma_{i+1}, t_{i+1}, ... ) = \\
+&amp; \frac{P(\sigma_1, t_1; \sigma_2, t_2; ...) }
 {
 P(\sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1},
   \sigma_{i+1}, t_{i+1}, ... )
 }
+\end{align}
 \]</span> Es decir, existe una probabilidad condicional de observacionesr <span class="math inline">\(\sigma_i\)</span> en <span class="math inline">\(t_i\)</span>, dado que sabemos cuales son todos los otros valores de <span class="math inline">\(\sigma\)</span>, <span class="math inline">\((\sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1}, \sigma_{i+1}, t_{i+1})\)</span> y esta probabilidad es diferente de la probabilidad marginal <span class="math inline">\(P(\sigma_i, t_i)\)</span>.</p>
 <p>Este proceso totalmente dependiente es un proceso extraño y poco intuitivo, por que no corresponde con lo que nosotros entendemos de un proceso definido en el tiempo. En principio, matemáticamente no tenemos porque pensar que un proceso debe ser . Sin embargo, físicamente, es si estamos estudiando observaciones que suceden en instantes de tiempo, tiene mucho más sentido establecer que estas tienen que depender sólo del pasado.</p>
 <p>Supondremos que los instantes de tiempo están ordenados de mayor a menor, $t_1 t_2 t_3 … $. Es decir, que la última observación realizada fue <span class="math inline">\(\sigma_1\)</span>. En este caso, un proceso causal se puede escribir cómo <span id="eq-proc_cond"><span class="math display">\[P(\sigma_1, t_1 | \sigma_2, t_2; \sigma_3, t_3; ...) =
@@ -276,9 +282,32 @@ P(\sigma_2, t_2| \sigma_3, t_3)... \\
 P(\sigma_{n-1}|t_{n-1})P(\sigma_n, t_n)
 \end{align}
 \]</span> En donde <span class="math inline">\(\sigma_n\)</span>, <span class="math inline">\(t_n\)</span> son las condiciones iniciales del proceso.</p>
-<p>A la probabilidad <span class="math inline">\(P(\sigma_i, t_i | \sigma_{i-1}, t_{i-1})\)</span> le llamamos <strong>probabilidad de transición</strong> y nos dice cual es la probabilidad de encontrarnos en un estado <span class="math inline">\(\sigma_i\)</span> sabiendo que estamos en un estado <span class="math inline">\(\sigma_{i-1}\)</span> en el instante anterior. Esta última ecuación nos permite llegar a una conclusión importante. Para caracterizar un proceso markoviano, sólo es necesario contar con las probabilidades de transición. Si tenemos estas probabilidades de transición, y las condiciones iniciales, podemos obtener la probabilidad de tener una realización específica.</p>
+<p>A la probabilidad <span class="math inline">\(P(\sigma_i, t_i | \sigma_{i-1}, t_{i-1})\)</span> le llamamos <em>probabilidad de transición</em> y nos dice cual es la probabilidad de encontrarnos en un estado <span class="math inline">\(\sigma_i\)</span> sabiendo que estamos en un estado <span class="math inline">\(\sigma_{i-1}\)</span> en el instante anterior. Esta última ecuación nos permite llegar a una conclusión importante. Para caracterizar un proceso markoviano, sólo es necesario contar con las probabilidades de transición. Si tenemos estas probabilidades de transición, y las condiciones iniciales, podemos obtener la probabilidad de tener una realización específica.</p>
+<section id="la-ecuación-de-chapman-kolmogorov" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="la-ecuación-de-chapman-kolmogorov"><span class="header-section-number">4.2.1</span> La ecuación de Chapman-Kolmogorov</h3>
+<p>La ecuación <a href="distribuciones.html#eq-totalprob" class="quarto-xref">Ecuación&nbsp;<span>3.4</span></a> se puede reescribir para un proceso estocástico como: <span class="math display">\[P(\sigma_1, t_1) = \sum_{\sigma_2\in\Omega} P(\sigma_1,t_1; \sigma_2, t_2)\]</span> y a partir de la definición de la probabilidad condicional: <span class="math display">\[P(\sigma_1, t_1) = \sum_{\sigma_2\in\Omega} P(\sigma_1, t_1|\sigma_2, t_2)P(\sigma_2, t_2)\]</span> de la misma forma, podemos escribir: <span class="math display">\[
+\begin{align}
+P(\sigma_1, t_1 | \sigma_3, t_3) &amp; =
+  \sum_{\sigma_2\in\Omega} P(\sigma_1, t_1; \sigma_2, t_2 | \sigma_3, t_3) \\
+&amp; = \sum_{\sigma_2\in\Omega} P(\sigma_1, t_1 | \sigma_2, t_2 ; \sigma_3, t_3) P(\sigma_2, t_2 | \sigma_3, t_3)
+\end{align}
+\]</span> si suponemos que nuestro proceso es markoviano, <span class="math inline">\(P(\sigma_1, t_1 | \sigma_2, t_2 ; \sigma_3, t_3) = P(\sigma_1, t_1 | \sigma_2, t_2)\)</span> y esta ecuación se vuelve: <span id="eq-Chapman-Kolmogorov"><span class="math display">\[
+P(\sigma_1, t_1 | \sigma_3, t_3) = \sum_{\sigma_2\in\Omega} P(\sigma_1, t_1 | \sigma_2, t_2) P(\sigma_2, t_2 | \sigma_3, t_3)
+\tag{4.3}\]</span></span></p>
+</section>
+<section id="formulación-matricial-de-un-proceso-estocástico" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="formulación-matricial-de-un-proceso-estocástico"><span class="header-section-number">4.2.2</span> Formulación matricial de un proceso estocástico</h3>
+<p>De lo anterior, vimos que los procesos markovianos se pueden definir en términos de sus probabilidades de transición <span class="math inline">\(P(\sigma_i, t_a|\sigma_j, t_b)\)</span>, es decir, en terminos de la probabilidad de encontrarnos en el estado <span class="math inline">\(\sigma_i\)</span> en el instante <span class="math inline">\(t_a\)</span>, dado que estuvimos en el <span class="math inline">\(\sigma_j\)</span> en el instante <span class="math inline">\(t_b\)</span>. Dado que cada probabilidad relaciona los dos estados <span class="math inline">\(\sigma_i\)</span> y <span class="math inline">\(\sigma_j\)</span>, podemos construir una matriz con las probabilidades de transición entre todos los pares de estados posibles del espacio <span class="math inline">\(\Omega\)</span>: <span class="math display">\[\mathbb{P}(t_a,t_b) =
+\left[\begin{array}{cccc}
+P(\sigma_1, t_a|\sigma_1, t_b) &amp; P(\sigma_1, t_i|\sigma_2, t_b) &amp; ... &amp; P(\sigma_1, t_a | \sigma_n, t_b)\\
+P(\sigma_2, t_a|\sigma_1, t_b) &amp; P(\sigma_2, t_i|\sigma_2, t_b) &amp; ... &amp; P(\sigma_2, t_a | \sigma_n, t_b)\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+P(\sigma_n, t_a|\sigma_1, t_b) &amp; P(\sigma_n, t_i|\sigma_2, t_b) &amp; ... &amp; P(\sigma_n, t_a | \sigma_n, t_b)\\
+\end{array}\right]
+\]</span> usando la <a href="#eq-Chapman-Kolmogorov" class="quarto-xref">Ecuación&nbsp;<span>4.3</span></a>, podemos ver que, si definimos tres instantes de tiempo: <span class="math inline">\(t_a&gt;t_b&gt;t_c\)</span> el elemento <span class="math inline">\((i,j)\)</span>, de la matriz <span class="math inline">\(\mathbb{P}(t_a, t_c)\)</span> está dado por <span class="math display">\[P_{ij}(t_a, t_c) = \sum_{\forall k} P_{ik}P_{kj} \]</span> lo cual nos dice que podemos escribir: <span class="math display">\[\mathbb{P}(t_a, t_c) = \mathbb{P}(t_a,t_b) \mathbb{P}(t_b, t_c)\]</span></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
