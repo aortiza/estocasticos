@@ -1,35 +1,29 @@
 {
   "index.qmd": {
-    "index.html": "53aac6f9"
-  },
-  "intro.qmd": {
-    "intro.html": "bf9f5eb2"
-  },
-  "summary.qmd": {
-    "summary.html": "b82f11b4"
-  },
-  "references.qmd": {
-    "references.html": "1c72c3bc"
+    "index.html": "a8d7d40d"
   },
   "introduccion.qmd": {
-    "introduccion.html": "508a10fd"
+    "introduccion.html": "96496f5c"
   },
   "distribuciones.qmd": {
-    "distribuciones.html": "79f63c0c"
+    "distribuciones.html": "2bb1d439"
   },
   "procesos_markovianos.qmd": {
-    "procesos_markovianos.html": "d141b6a9"
+    "procesos_markovianos.html": "b8e27482"
   },
   "tiempo_continuo.qmd": {
-    "tiempo_continuo.html": "d3d60ac3"
+    "tiempo_continuo.html": "9ffb734c"
   },
   "calculo_de_ito.qmd": {
-    "calculo_de_ito.html": "f1c8762d"
+    "calculo_de_ito.html": "b3c59218"
   },
   "dinamica_molecular.qmd": {
-    "dinamica_molecular.html": "f7a62faa"
+    "dinamica_molecular.html": "bbe90edd"
   },
   "metropolis_hastings.qmd": {
-    "metropolis_hastings.html": "18c6fc78"
+    "metropolis_hastings.html": "ae9eae96"
+  },
+  "references.qmd": {
+    "references.html": "91bf582b"
   }
 }

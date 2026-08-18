@@ -136,7 +136,7 @@ En este sentido, se puede entender como una medida del centro de la distribució
 
 La varianza se define como:
 $$var(R) = \left<R^2\right>-\left<R\right>^2$$
-donde al término \left<R^2\right> se le llama el segundo momento y se calcula como:
+donde al término $\left<R^2\right> se le llama el segundo momento y se calcula como:
 $$\left<R^2\right> = \sum_{\sigma\in\Omega} P(\sigma) R(\sigma)^2$$
 La varianza, así como la desviación estandar $std = \sqrt{var}$ es una medida de la dispersión entre las observaciones de una variable aleatoria, o el ancho de una distribución. 
 

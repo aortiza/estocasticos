@@ -19,19 +19,21 @@ $$
 \begin{align}
 P(\sigma_1, t_1; \sigma_2, t_2; \sigma_3, t_3; ...) & = P(\sigma_1, t_1) P(\sigma_2, t_2) P(\sigma_3, t_3)\\
  & = \prod_i P(\sigma_i, t_i) 
-\end{align}$$
+ \end{align}$$
 De nuevo, un ejemplo de un proceso estocástico totalmente independiente es la secuencia que resulta de tirar un dado repetidamente, o de forma equivalente, la secuencia de tirar $N$ dados. En ambos casos el resultado de la tirada $i$ no depende de nada de lo que haya sucedido en el pasado. 
 
 En el otro extremo, podemos pensar en un caso en el que cada observación depende de todas las otras observaciones. Esto se escribiría de la siguiente forma
 $$
-P(\sigma_i, t_i |
-  \sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1}, 
-  \sigma_{i+1}, t_{i+1}, ... ) =
-\frac{P(\sigma_1, t_1; \sigma_2, t_2; ...) }
+\begin{align}
+P(\sigma_i, t_i | 
+  \sigma_1, t_1; & \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1}, 
+  \sigma_{i+1}, t_{i+1}, ... ) = \\
+& \frac{P(\sigma_1, t_1; \sigma_2, t_2; ...) }
 {
 P(\sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1}, 
   \sigma_{i+1}, t_{i+1}, ... ) 
 }
+\end{align}
 $$
 Es decir, existe una probabilidad condicional de observacionesr $\sigma_i$ en $t_i$, dado que sabemos cuales son todos los otros valores de $\sigma$, $(\sigma_1, t_1; \sigma_2, t_2; ... \sigma_{i-1}, t_{i-1}, \sigma_{i+1}, t_{i+1})$
 y esta probabilidad es diferente de la probabilidad marginal $P(\sigma_i, t_i)$. 
@@ -70,5 +72,43 @@ P(\sigma_{n-1}|t_{n-1})P(\sigma_n, t_n)
 $$
 En donde $\sigma_n$, $t_n$ son las condiciones iniciales del proceso.
 
-A la probabilidad $P(\sigma_i, t_i | \sigma_{i-1}, t_{i-1})$ le llamamos **probabilidad de transición** y nos dice cual es la probabilidad de encontrarnos en un estado $\sigma_i$ sabiendo que estamos en un estado $\sigma_{i-1}$ en el instante anterior. 
-Esta última ecuación nos permite llegar a una conclusión importante. Para caracterizar un proceso markoviano, sólo es necesario contar con las probabilidades de transición.
+A la probabilidad $P(\sigma_i, t_i | \sigma_{i-1}, t_{i-1})$ le llamamos *probabilidad de transición* y nos dice cual es la probabilidad de encontrarnos en un estado $\sigma_i$ sabiendo que estamos en un estado $\sigma_{i-1}$ en el instante anterior. 
+Esta última ecuación nos permite llegar a una conclusión importante. Para caracterizar un proceso markoviano, sólo es necesario contar con las probabilidades de transición. Si tenemos estas probabilidades de transición, y las condiciones iniciales, podemos obtener la probabilidad de tener una realización específica.
+
+### La ecuación de Chapman-Kolmogorov
+
+La ecuación @eq-totalprob se puede reescribir para un proceso estocástico como:
+$$P(\sigma_1, t_1) = \sum_{\sigma_2\in\Omega} P(\sigma_1,t_1; \sigma_2, t_2)$$
+y a partir de la definición de la probabilidad condicional:
+$$P(\sigma_1, t_1) = \sum_{\sigma_2\in\Omega} P(\sigma_1, t_1|\sigma_2, t_2)P(\sigma_2, t_2)$$
+de la misma forma, podemos escribir:
+$$
+\begin{align}
+P(\sigma_1, t_1 | \sigma_3, t_3) & = 
+  \sum_{\sigma_2\in\Omega} P(\sigma_1, t_1; \sigma_2, t_2 | \sigma_3, t_3) \\ 
+ & = \sum_{\sigma_2\in\Omega} P(\sigma_1, t_1 | \sigma_2, t_2 ; \sigma_3, t_3) P(\sigma_2, t_2 | \sigma_3, t_3)
+ \end{align}
+$$
+si suponemos que nuestro proceso es markoviano,
+$P(\sigma_1, t_1 | \sigma_2, t_2 ; \sigma_3, t_3) = P(\sigma_1, t_1 | \sigma_2, t_2)$ y esta ecuación se vuelve:
+$$
+\begin{align}
+P(\sigma_1, t_1 | \sigma_3, t_3) = \sum_{\sigma_2\in\Omega} P(\sigma_1, t_1 | \sigma_2, t_2) P(\sigma_2, t_2 | \sigma_3, t_3)
+ \end{align}
+$${#eq-Chapman-Kolmogorov}
+
+### Formulación matricial de un proceso estocástico
+
+De lo anterior, vimos que los procesos markovianos se pueden definir en términos de sus probabilidades de transición $P(\sigma_i, t_a|\sigma_j, t_b)$, es decir, en terminos de la probabilidad de encontrarnos en el estado $\sigma_i$ en el instante $t_a$, dado que estuvimos en el $\sigma_j$ en el instante $t_b$. Dado que cada probabilidad relaciona los dos estados $\sigma_i$ y $\sigma_j$, podemos construir una matriz con las probabilidades de transición entre todos los pares de estados posibles del espacio $\Omega$: 
+$$\mathbb{P}(t_a,t_b) = 
+\left[\begin{array}{cccc}
+P(\sigma_1, t_a|\sigma_1, t_b) & P(\sigma_1, t_i|\sigma_2, t_b) & ... & P(\sigma_1, t_a | \sigma_n, t_b)\\ 
+P(\sigma_2, t_a|\sigma_1, t_b) & P(\sigma_2, t_i|\sigma_2, t_b) & ... & P(\sigma_2, t_a | \sigma_n, t_b)\\ 
+\vdots & \vdots & \ddots & \vdots \\
+P(\sigma_n, t_a|\sigma_1, t_b) & P(\sigma_n, t_i|\sigma_2, t_b) & ... & P(\sigma_n, t_a | \sigma_n, t_b)\\ 
+\end{array}\right]
+$$
+usando la @eq-Chapman-Kolmogorov, podemos ver que, si definimos tres instantes de tiempo: $t_a>t_b>t_c$ el elemento $(i,j)$, de la matriz $\mathbb{P}(t_a, t_c)$ está dado por
+$$P_{ij}(t_a, t_c) = \sum_{\forall k} P_{ik}P_{kj} $$
+lo cual nos dice que podemos escribir:
+$$\mathbb{P}(t_a, t_c) = \mathbb{P}(t_a,t_b) \mathbb{P}(t_b, t_c)$$
